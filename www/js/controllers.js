@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $window) {
+.controller('HomePageCtrl', function($scope, $window) {
     
      $scope.client = new WindowsAzure.MobileServiceClient('https://testingwithazure.azurewebsites.net');
 
@@ -49,8 +49,7 @@ angular.module('starter.controllers', [])
                 complete: false
             }).then(function (response) {
                 console.log('here is the repsonse', response);
-            });
-            
+            });        
     }
     
     $scope.deleting = function(params) {
@@ -73,7 +72,7 @@ angular.module('starter.controllers', [])
        
 })
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('ChecklistCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -86,8 +85,5 @@ angular.module('starter.controllers', [])
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
-})
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
 });
+
