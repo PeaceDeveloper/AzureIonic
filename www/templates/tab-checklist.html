@@ -1,43 +1,33 @@
-<ion-view view-title="Checklist" >
-    
+<ion-view view-title="Checklist">
     <ion-nav-buttons side="primary">
-      <button class="button button-icon icon ion-ios-minus-outline"
-          ng-click="toggling()">   
-      </button>
+        <button class="button button-icon icon ion-ios-minus-outline" ng-click="toggling()">
+        </button>
     </ion-nav-buttons>
-    
-    
-    
-  <ion-content>
 
-   <div class="list">
+    <ion-content>
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>    
+        <div class="list">
+            <div class="item item-input-inset">
+                <label class="item-input-wrapper">
+                    <input type="text" placeholder="Today's List" ng-model='goal'>
+                </label>
+                <button class="button button-balanced button-small" ng-click="adding(goal);goal='' ">
+                    Submit
+                </button>
+            </div>
+        </div>
 
-  <div class="item item-input-inset">
-    <label class="item-input-wrapper">
-      <input type="text" placeholder="Today's List" ng-model='goal'>
-    </label>
-    <button class="button button-balanced button-small" ng-click="adding(goal);goal='' ">
-      Submit
-    </button>
-  </div>
-</div>
-
-      <ion-list show-delete="shouldShowDelete">
-
-        <ion-item ng-repeat="item in items" item="item">
-             
-         <label class="checkbox" style="display: inline-block; vertical-align: middle; height:42px">
-        <input type="checkbox" ng-model="item.complete"  ng-checked="item.complete" ng-click="checklistChange(item)">
-     </label>
-          
-              {{ item.text }}
-    
-        
-          <ion-delete-button class="ion-trash-a" ng-click="deleteItem(item)"></ion-delete-button>
-  
-        </ion-item>
-
-      </ion-list>
-
-  </ion-content>
+        <ion-list show-delete="shouldShowDelete">
+            <ion-item ng-repeat="item in items" item="item">
+                <label class="checkbox" style="display: inline-block; vertical-align: middle; height:42px">
+                    <input type="checkbox" ng-model="item.complete" ng-checked="item.complete" ng-click="checklistChange(item)">
+                </label>
+                {{ item.text }}
+                <ion-delete-button class="ion-trash-a" ng-click="deleteItem(item)"></ion-delete-button>
+            </ion-item>
+        </ion-list>  
+    </ion-content>
 </ion-view>
