@@ -64,7 +64,13 @@ angular.module('starter.controllers', [])
     }
     
  
-       
+ $scope.shouldShowDelete = false; 
+ 
+ $scope.toggling = function() {
+     $scope.shouldShowDelete = !$scope.shouldShowDelete; 
+     console.log('the value is', $scope.shouldShowDelete);
+     
+ }    
 
 $scope.adding = function (goal) {
        $scope.todoItemTable.insert({
