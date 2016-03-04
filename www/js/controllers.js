@@ -1,19 +1,13 @@
 angular.module('starter.controllers', [])
 
 .controller('HomePageCtrl', function($scope, $window) {
-    
-     $scope.client = new WindowsAzure.MobileServiceClient('https://testingwithazure.azurewebsites.net');
+})
 
-     // Create a table reference
+.controller('ChecklistCtrl', function($scope, Chats, $window) {
+   
+     $scope.client = new WindowsAzure.MobileServiceClient('http://testingwithazure.azurewebsites.net/');
+
      $scope.todoItemTable = $scope.client.getTable('todoitem');
-    //  .then(function(items) {
-    //     // Assigin the results to a $scope variable
-    //     $scope.items = items;
-    //     console.log($scope.items);
-
-    // }, function(err) {
-    //     console.error('There was an error quering Azure ' + err);
-    // });
      
      console.log($scope.client);
      console.log('///', $scope.todoItemTable);
@@ -22,19 +16,11 @@ angular.module('starter.controllers', [])
             .read()                       
             .then(createTodoItemList, handleError);
             
-          function createTodoItemList(items) {
+       function createTodoItemList(items) {
               
               console.log('items', items);
               $scope.items = items;
-        // Cycle through each item received from Azure and add items to the item list
-        // var listItems = $.map(items, createTodoItem);
-        // $('#todo-items').empty().append(listItems).toggle(listItems.length > 0);
-        // $('#summary').html('<strong>' + items.length + '</strong> item(s)');
-
-        // // Wire up the event handlers for each item in the list
-        // $('.item-delete').on('click', deleteItemHandler);
-        // $('.item-text').on('change', updateItemTextHandler);
-        // $('.item-complete').on('change', updateItemCompleteHandler);
+              $scope.$apply();
     }
     
         function handleError(error) {
@@ -43,7 +29,14 @@ angular.module('starter.controllers', [])
         $('#errorlog').append($('<li>').text(text));
     }
     
-    $scope.adding = function () {
+    function refreshDisplay() {
+         $scope.todoItemTable  
+                .read()                       
+                .then(createTodoItemList, handleError);
+        
+    }
+    
+    $scope.addingMethod = function () {
             $scope.todoItemTable.insert({
                 text: 'hey hey',
                 complete: false
@@ -69,21 +62,41 @@ angular.module('starter.controllers', [])
             .update({ id: itemId, text: newText })  // Async send the update to backend
             .then(refreshDisplay, handleError); // Update the UI    
     }
+    
+ 
        
-})
 
-.controller('ChecklistCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+$scope.adding = function (goal) {
+       $scope.todoItemTable.insert({
+                text: goal,
+                complete: false
+            }).then(refreshDisplay, handleError);        
+}
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+$scope.checklistChange = function (item) {
+    console.log('here we are', item);
+    
+       $scope.todoItemTable
+            .update({ id: item.id, complete: item.complete })  // Async send the update to backend
+            .then(refreshDisplay, handleError); // Update the UI    
+    
+}
+
+$scope.deleteItem = function (item) {
+    console.log('deleting', item);
+     $scope.todoItemTable
+            .del({ id: item.id })   // Async send the deletion to backend
+            .then(refreshDisplay, handleError); // Update the UI               
+}
+
+
+
+  $scope.devList = [
+    { text: "HTML5", checked: true },
+    { text: "CSS3", checked: false },
+    { text: "JavaScript", checked: false }
+  ];
+
+
 });
 

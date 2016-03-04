@@ -1,6 +1,6 @@
 <ion-view view-title="Checklist">
   <ion-content>
-    <ion-list>
+    <!--<ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap">
         <img ng-src="{{chat.face}}">
         <h2>{{chat.name}}</h2>
@@ -11,6 +11,42 @@
           Delete
         </ion-option-button>
       </ion-item>
-    </ion-list>
+    </ion-list>-->
+    
+    
+   <div class="list">
+
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Today's List" ng-model='goal'>
+    </label>
+    <button class="button button-small" ng-click="adding(goal);goal='' ">
+      Submit
+    </button>
+  </div>
+</div>
+
+ <ion-checkbox ng-repeat="item in items"
+                      ng-model="item.complete" 
+                      ng-checked="item.complete" 
+                      ng-change="checklistChange(item)">
+          {{ item.text }}
+ 
+        </ion-checkbox>
+        
+  <!--<br>
+  <br>
+ <button class="button button-assertive button-small" >Delete</button>-->
+        
+<!--<ion-list show-delete="shouldShowDelete">
+  <ion-item>
+    <ion-delete-button class="ion-minus-circled"></ion-delete-button>
+    Hello, list item!
+  </ion-item>
+</ion-list>
+<ion-toggle ng-model="shouldShowDelete">
+  Show Delete?
+</ion-toggle>-->
+
   </ion-content>
 </ion-view>
