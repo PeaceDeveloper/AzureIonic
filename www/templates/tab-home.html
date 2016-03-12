@@ -1,15 +1,58 @@
 <ion-view view-title="Home">
-  <ion-content class="padding">
-    <h2>Welcome to Ionic + Azure</h2>
-    <!--<button ng-click="adding()">Here we go</button>-->
-    <p>
-    This is the Ionic starter tabs app with a fully integrated Azure backend mobile service. To create a Backend on Azure, check out the <a href="https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-cordova-get-started/" target="_blank">Azure docs</a>.
-    </p>
-    <p>
-      To edit the content of each tab, edit the corresponding template file in <code>www/templates/</code>. This template is <code>www/templates/tab-dash.html</code>
-    </p>
-    <p>
-      To learn about other mobile services offered by Azure such as Azure authentication, Push Notifications and Online/Offline sync, check out<a href="https://azure.microsoft.com/en-us/documentation/services/app-service/mobile/" target="_blank">this tutorial </a>.
-    </p>
-  </ion-content>
+    <ion-content class="padding">
+       <center> <div >
+            <img src="img/azure.png" style="height: 70px">
+            <img src="img/plus.png" style="height: 70px">
+            <img src="img/ionic_Logo.png" style="height: 70px">
+        </div>
+        </center>
+        <div class="card">
+            <div class="item item-divider">
+                Welcome
+            </div>
+            <div class="item item-text-wrap">
+                This is an Ionic To-Do list sample app integrated with Azure backend mobile service. To edit the content of each tab, edit the source code in <code>www</code> folder.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="item item-divider">
+                Setting up Azure Mobile App services
+            </div>
+            
+            <div class="item item-text-wrap">
+                To create a Backend on Azure, select one of the two options and create a unique azure-websites url:
+                
+                <div class="card">
+                    <div class="item item-divider">
+                        <a href="https://tryappservice.azure.com/" target="_blank">New to Azure? Try Azure App services for free</a>
+                    </div>
+                    <div class="item item-text-wrap">
+                        <img src="">
+                        <img class="full-image" src="img/tryAzureService.png">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="item item-divider">
+                        <h3><a href="https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-cordova-get-started/" target="_blank">Already have an Azure account</a></h3>
+                    </div>
+                    <div class="item item-text-wrap">
+                        <img src="">
+                        <img class="full-image" src="img/azureAccount.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="item item-divider">
+                Other Services
+            </div>
+            <div class="item item-text-wrap">
+                To learn about other mobile services offered by Azure such as Azure authentication, Push Notifications and Online/Offline sync, check out <a href="https://azure.microsoft.com/en-us/documentation/services/app-service/mobile/" target="_blank">this tutorial</a>.
+            </div>
+        </div>
+
+    </ion-content>
 </ion-view>

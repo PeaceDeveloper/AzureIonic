@@ -1,28 +1,25 @@
 angular.module('starter.services', [])
 
 .factory('List', function() {
+    var url = 'ADD AZURE URL HERE';
     var client = new WindowsAzure.MobileServiceClient('http://testingwithazure.azurewebsites.net/');
     var todoItemTable = client.getTable('todoitem');
 
     function refreshDisplay() {
-        console.log('I am being');
-      return todoItemTable
-        .read()
-        .then(createTodoItemList, handleError); 
+        return todoItemTable
+            .read()
+            .then(createTodoItemList, handleError);
     }
-    
-   
-        
-     function createTodoItemList(items) {
-         console.log('here are the items', items);
-       return items;
+
+    function createTodoItemList(items) {
+        return items;
     }
-    
+
     function handleError(error) {
         var text = error + (error.request ? ' - ' + error.request.status : '');
         console.error(text);
     }
-    
+
     function deleteItem(item) {
         return todoItemTable
             .del({
@@ -30,16 +27,16 @@ angular.module('starter.services', [])
             })                                  // Async send the deletion to backend
             .then(refreshDisplay, handleError); // Update the UI        
     }
-    
+
     function addItem(goal) {
-         return todoItemTable.insert({
+        return todoItemTable.insert({
             text: goal,
             complete: false
         }).then(refreshDisplay, handleError);
     }
-    
+
     function checklistChange(item) {
-         return todoItemTable
+        return todoItemTable
             .update({
                 id: item.id,
                 complete: item.complete
@@ -47,28 +44,18 @@ angular.module('starter.services', [])
             .then(refreshDisplay, handleError); // Update the UI    
     }
 
-  return {
-    all: function() {
-    //    initialize().then(function name(params) {
-    //        console.log('pppp', params);
-    //        return params;
-    //    });
-    //    console.log('litems', Litems);
-       return refreshDisplay();
-        
-
-    },
-    deleteItem: function(item) {
-        
-        return deleteItem(item)
-                  
-    },
-    addItem: function(goal) {
-        return addItem(goal);
-
-  },
-  checklistChange: function(item) {
-      return checklistChange(item)
-  }
-  }
+    return {
+        all: function() {
+            return refreshDisplay();
+        },
+        deleteItem: function(item) {
+            return deleteItem(item)
+        },
+        addItem: function(goal) {
+            return addItem(goal);
+        },
+        checklistChange: function(item) {
+            return checklistChange(item)
+        }
+    }
 });

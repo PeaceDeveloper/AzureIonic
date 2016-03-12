@@ -1,16 +1,15 @@
 angular.module('starter.controllers', [])
 
-.controller('HomePageCtrl', function($scope, $window, List) {
-})
+.controller('HomePageCtrl', function($scope, $window, List) {})
 
 .controller('ChecklistCtrl', function($scope, $window, List) {
     $scope.shouldShowDelete = false;
-
+    
     $scope.doRefresh = function() {
-         List.all().then(function (newList) {
+        List.all().then(function(newList) {
             $scope.items = newList;
-             $scope.$broadcast('scroll.refreshComplete');
-        $scope.$apply();
+            $scope.$broadcast('scroll.refreshComplete');
+            $scope.$apply();
         });
     };
 
@@ -19,26 +18,27 @@ angular.module('starter.controllers', [])
     };
 
     $scope.adding = function(goal) {
-        List.addItem(goal).then(function (newList) {
-            $scope.items = newList;
-            $scope.$apply();
-            
-        });
+        if(goal){
+            List.addItem(goal).then(function(newList) {
+                $scope.items = newList;
+                $scope.$apply();
+            });    
+        }
     };
 
     $scope.checklistChange = function(item) {
-        List.checklistChange(item).then(function (newList) {
+        List.checklistChange(item).then(function(newList) {
             $scope.items = newList;
             $scope.$apply();
         });
     }
 
     $scope.deleteItem = function(item) {
-        List.deleteItem(item).then(function (newList) {
+        List.deleteItem(item).then(function(newList) {
             $scope.items = newList;
             $scope.$apply();
-        });       
+        });
     }
-    
+
     $scope.doRefresh();
 });
