@@ -1,45 +1,17 @@
 angular.module('starter.controllers', [])
 
-.controller('HomePageCtrl', function($scope, $window) {})
+.controller('HomePageCtrl', function($scope, $window, List) {
+})
 
-.controller('ChecklistCtrl', function($scope, Chats, $window) {
-    $scope.client = new WindowsAzure.MobileServiceClient('http://testingwithazure.azurewebsites.net/');
-    $scope.todoItemTable = $scope.client.getTable('todoitem');
+.controller('ChecklistCtrl', function($scope, $window, List) {
     $scope.shouldShowDelete = false;
 
-    $scope.todoItemTable
-        .read()
-        .then(createTodoItemList, handleError);
-
-    function createTodoItemList(items) {
-        $scope.items = items;
-        $scope.$broadcast('scroll.refreshComplete');
-        $scope.$apply();
-    }
-
-    function handleError(error) {
-        var text = error + (error.request ? ' - ' + error.request.status : '');
-        console.error(text);
-        $('#errorlog').append($('<li>').text(text));
-    }
-
-    function refreshDisplay() {
-        $scope.todoItemTable
-            .read()
-            .then(createTodoItemList, handleError);
-    }
-
-    $scope.updating = function() {
-        $scope.todoItemTable
-            .update({
-                id: itemId,
-                text: newText
-            })                                  // Async send the update to backend
-            .then(refreshDisplay, handleError); // Update the UI
-    }
-    
     $scope.doRefresh = function() {
-        refreshDisplay()
+         List.all().then(function (newList) {
+            $scope.items = newList;
+             $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+        });
     };
 
     $scope.toggling = function() {
@@ -47,26 +19,26 @@ angular.module('starter.controllers', [])
     };
 
     $scope.adding = function(goal) {
-        $scope.todoItemTable.insert({
-            text: goal,
-            complete: false
-        }).then(refreshDisplay, handleError);
+        List.addItem(goal).then(function (newList) {
+            $scope.items = newList;
+            $scope.$apply();
+            
+        });
     };
 
     $scope.checklistChange = function(item) {
-        $scope.todoItemTable
-            .update({
-                id: item.id,
-                complete: item.complete
-            })                                  // Async send the update to backend
-            .then(refreshDisplay, handleError); // Update the UI    
+        List.checklistChange(item).then(function (newList) {
+            $scope.items = newList;
+            $scope.$apply();
+        });
     }
 
     $scope.deleteItem = function(item) {
-        $scope.todoItemTable
-            .del({
-                id: item.id
-            })                                  // Async send the deletion to backend
-            .then(refreshDisplay, handleError); // Update the UI               
+        List.deleteItem(item).then(function (newList) {
+            $scope.items = newList;
+            $scope.$apply();
+        });       
     }
+    
+    $scope.doRefresh();
 });
