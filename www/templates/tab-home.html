@@ -1,17 +1,16 @@
 <ion-view view-title="Home">
     <ion-content class="padding">
-       <center> <div >
-            <img src="img/azure.png" style="height: 70px">
-            <img src="img/plus.png" style="height: 70px">
-            <img src="img/ionic_Logo.png" style="height: 70px">
+        <div class="center imageResize">
+            <img src="img/azure.png">
+            <img src="img/plus.png">
+            <img src="img/Ionic_Logo.png">
         </div>
-        </center>
         <div class="card">
             <div class="item item-divider">
                 Welcome
             </div>
             <div class="item item-text-wrap">
-                This is an Ionic To-Do list sample app integrated with Azure backend mobile service. To edit the content of each tab, edit the source code in <code>www</code> folder.
+                <p>This is an Ionic To-Do list sample app integrated with Azure backend mobile service. To edit the content of each tab, edit the source code in <code>www</code> folder.</p>
             </div>
         </div>
 
@@ -21,25 +20,25 @@
             </div>
             
             <div class="item item-text-wrap">
-                To create a Backend on Azure, select one of the two options and create a unique azure-websites url:
+                <p>To create a Backend on Azure, select one of the two options and create a unique azure-websites url:</p>
                 
                 <div class="card">
                     <div class="item item-divider">
-                        <a href="https://tryappservice.azure.com/" target="_blank">New to Azure? Try Azure App services for free</a>
+                        <a href="" ng-click="openInBrowser('https://tryappservice.azure.com/')">New to Azure? Try Azure App services for free</a>
                     </div>
                     <div class="item item-text-wrap">
-                        <img src="">
-                        <img class="full-image" src="img/tryAzureService.png">
+                        <p>Create a temporary Azure instance in 4 easy steps. Insert the Azure url generated in step 4 in <code>www/js/services.js</code> file and start using your app. Note that this url will expire in 1 hour.</p>
+                        <img class="full-image padding" src="img/tryAzureService.png">
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="item item-divider">
-                        <h3><a href="https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-cordova-get-started/" target="_blank">Already have an Azure account</a></h3>
+                        <a href="" ng-click="openInBrowser('https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-cordova-get-started/')">Already have an Azure account</a>
                     </div>
                     <div class="item item-text-wrap">
-                        <img src="">
-                        <img class="full-image" src="img/azureAccount.png">
+                        <p>Create a functional backend with your Azure subscription by logging in to your Azure Portal.</p>
+                        <img class="full-image padding" src="img/azureAccount.png">
                     </div>
                 </div>
             </div>
@@ -50,7 +49,7 @@
                 Other Services
             </div>
             <div class="item item-text-wrap">
-                To learn about other mobile services offered by Azure such as Azure authentication, Push Notifications and Online/Offline sync, check out <a href="https://azure.microsoft.com/en-us/documentation/services/app-service/mobile/" target="_blank">this tutorial</a>.
+                <p>To learn about other mobile services offered by Azure such as Azure authentication, Push Notifications and Online/Offline sync, check out <a href="" ng-click="openInBrowser('https://azure.microsoft.com/en-us/documentation/services/app-service/mobile/')">this documentation</a>.</p>
             </div>
         </div>
 

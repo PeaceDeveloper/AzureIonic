@@ -1,6 +1,10 @@
 angular.module('starter.controllers', [])
 
-.controller('HomePageCtrl', function($scope, $window, List) {})
+.controller('HomePageCtrl', function($scope, $window) {
+    $scope.openInBrowser = function (URL) {
+          $window.open(URL, '_system')
+    }
+})
 
 .controller('ChecklistCtrl', function($scope, $window, List) {
     $scope.shouldShowDelete = false;

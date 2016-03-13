@@ -1,8 +1,8 @@
 angular.module('starter.services', [])
 
-.factory('List', function() {
+.factory('List', function($ionicPopup) {
     var url = 'ADD AZURE URL HERE';
-    var client = new WindowsAzure.MobileServiceClient('http://testingwithazure.azurewebsites.net/');
+    var client = new WindowsAzure.MobileServiceClient(url);
     var todoItemTable = client.getTable('todoitem');
 
     function refreshDisplay() {
@@ -18,6 +18,13 @@ angular.module('starter.services', [])
     function handleError(error) {
         var text = error + (error.request ? ' - ' + error.request.status : '');
         console.error(text);
+        console.log('error', error.request.status);
+        if(error.request.status == '0') {
+            $ionicPopup.alert({
+                title: 'Connection Failure',
+                template: 'Connection with Backend can not be established.'
+           }); 
+        }       
     }
 
     function deleteItem(item) {
