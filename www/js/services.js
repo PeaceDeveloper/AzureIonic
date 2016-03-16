@@ -1,7 +1,7 @@
 angular.module('starter.services', [])
 
 .factory('List', function($ionicPopup) {
-    var url = 'ADD AZURE URL HERE';
+    var url = "ADD AZURE URL HERE";
     var client = new WindowsAzure.MobileServiceClient(url);
     var todoItemTable = client.getTable('todoitem');
 
@@ -19,7 +19,7 @@ angular.module('starter.services', [])
         var text = error + (error.request ? ' - ' + error.request.status : '');
         console.error(text);
         console.log('error', error.request.status);
-        if(error.request.status == '0') {
+        if(error.request.status == '0' || error.request.status == '404') {
             $ionicPopup.alert({
                 title: 'Connection Failure',
                 template: 'Connection with Backend can not be established.'
